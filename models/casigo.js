@@ -7,7 +7,11 @@ module.exports = {
 	},
 	sDAGpixel: function(req, res, next){
 		res.send(nodes.Nodes())
-	}
+	},
+	sDAGinfo: function(req, res, next){
+		console.log(nodes.Infos())
+		res.json(nodes.Infos())
+        }
 }
 
 
