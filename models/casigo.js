@@ -6,7 +6,7 @@ module.exports = {
 		res.send(Math.round(Math.random()*37).toString())
 	},
 	sDAGpixel: function(req, res, next){
-		res.send(nodes.Nodes())
+		res.send(nodes.Photos())
 	},
 	sDAGinfo: function(req, res, next){
 		console.log(nodes.Infos())
