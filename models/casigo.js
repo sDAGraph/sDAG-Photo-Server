@@ -9,9 +9,11 @@ module.exports = {
 		res.send(nodes.Photos())
 	},
 	sDAGinfo: function(req, res, next){
-		console.log(nodes.Infos())
 		res.json(nodes.Infos())
-        }
+        },
+	sDAGinput: function(req, res, next){
+		res.json(nodes.InputToHex(req.body.coordinate, req.body.url, req.body.introduction))
+	}
 }
 
 
