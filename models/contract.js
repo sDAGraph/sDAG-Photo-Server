@@ -1,7 +1,7 @@
 const web3 = require('web3');
 
 web3js = new web3(new web3.providers.HttpProvider("https://kovan.infura.io"));
-var address = "0xc8b1490231e5B26013051f387b8028de0E23DFC5"
+var address = "0x61003592bfB4f2920fFF7a515A2a9631F3D95720"
 var abi = [
         {
                 "constant": false,
