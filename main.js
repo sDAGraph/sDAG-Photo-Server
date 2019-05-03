@@ -16,10 +16,10 @@ var numCPUs = 1;
 
 MongoClient.connect("mongodb://192.168.51.203:27017", { useNewUrlParser: true })
 	.then(client => {
-		const sDAG_db = client.db('sDAG_scan');
+		const sDAG_db = client.db('sDAGf');
 		app.locals.block_col = sDAG_db.collection('sDAG_block');
 		app.locals.transaction_col = sDAG_db.collection('sDAG_transaction');
-		app.locals.sDAG_db = client.db('sDAG_scan');
+		app.locals.sDAG_db = client.db('sDAGf');
 }).catch(error => console.error(error));
 
 basic.portInUse(config.port, function(returnValue) {
