@@ -8,19 +8,26 @@ module.exports = {
 	},
 	sDAGpixel: function(req, res, next){
 		req.app.locals.sDAG_db.collection(req.query.collection||'pixelPhoto').find(req.query.target||{}).sort({ timestamp: parseInt(req.query.sort)||-1 }).limit(parseInt(req.query.limit)||300).toArray().then(response => {	res.status(200).json(response)}).catch(error => console.error(error));
-		//res.send(nodes.Photos())
 	},
 	sDAGinfo: function(req, res, next){
-		res.json(nodes.Infos())
+		req.app.locals.sDAG_db.collection(req.query.collection||'pixelInfo').find(req.query.target||{}).sort({ timestamp: parseInt(req.query.sort)||-1 }).limit(parseInt(req.query.limit)||300).toArray().then(response => {   res.status(200).json(response[0])}).catch(error => console.error(error));
+		//res.json(nodes.Infos())
         },
         sDAGprice: function(req, res, next){
-		//console.log(contract.GetPrice(req.body.coordinate))
-                //res.json([{"price":contract.GetPrice(req.body.coordinate)}])
 		contract.GetPrice(res,req.body.coordinate)
 	},
 	sDAGinput: function(req, res, next){
-		//res.json(nodes.InputToHex(req.body.coordinate, req.body.url, req.body.introduction))
 		res.json([{"input":contract.Contract(req.body.coordinate, req.body.url, req.body.introduction)}])
+	},
+	sDAGdecode: function(req, res ,next){
+		res.send(contract.OutDecode(req.body.args, req.body.str))
+	},
+	sDAGbuyCoordinator: function(req, res, next){
+		let inputHex = contract.buyCoordinatorHex(req.body.coor, req.body.coimage, req.body.introduction, req.body.tokens).replace("0x","");
+		res.json([{"input":inputHex}]);
+	},
+	sDAGsymbol:function(req, res, next){
+		res.json({"symbol":contract.GetSymbol(req.body.ret)});
 	}
 }
 

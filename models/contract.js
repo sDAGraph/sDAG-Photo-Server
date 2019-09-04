@@ -1,7 +1,7 @@
 const web3 = require('web3');
 
 web3js = new web3(new web3.providers.HttpProvider("https://kovan.infura.io"));
-var address = "0x61003592bfB4f2920fFF7a515A2a9631F3D95720"
+var address = "0x0c68b2e0f953c4907b5e743a55741996d2a65187"
 var abi = [
         {
                 "constant": false,
@@ -119,6 +119,9 @@ var MyContract = new web3js.eth.Contract(abi, address);
 module.exports = {
         Contract,
 	GetPrice,
+	OutDecode,
+	buyCoordinatorHex,
+	GetSymbol
 }
 
 function GetPrice(res,cor){
@@ -130,3 +133,17 @@ function Contract(cor, url, intro){
 	return hex
 }
 
+function OutDecode(args, str){
+	return web3js.eth.abi.decodeParameters(args, str)
+}
+
+function buyCoordinatorHex(coor,coimage,introduction,tokens){
+	//var abic = JSON.parse(fs.readFileSync("buyCoordinator.json"));
+	let abic = require("./buyCoordinator");
+	var input = web3js.eth.abi.encodeFunctionCall(abic,[coor,coimage,introduction,tokens]);
+	return input;
+}
+function GetSymbol(ret){
+	ret = "0x" + ret;
+	return web3js.eth.abi.decodeParameter('string',ret);
+}

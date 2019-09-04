@@ -14,7 +14,7 @@ app.use(cors())
 app.set('port', config.port);
 var numCPUs = 1;
 
-MongoClient.connect("mongodb://192.168.51.203:27017", { useNewUrlParser: true })
+MongoClient.connect("mongodb://127.0.0.1:27017", { useNewUrlParser: true })
 	.then(client => {
 		const sDAG_db = client.db('sDAGf');
 		app.locals.block_col = sDAG_db.collection('sDAG_block');
